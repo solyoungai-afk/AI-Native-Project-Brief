@@ -37,7 +37,20 @@ Create or update this file at the project root:
 PROJECT_BRIEF.md
 ```
 
-If the repo already has an equivalent owner-facing document, update it instead and add a root link if needed. Write in the project/user language. If the user is Korean, Korean is usually correct; keep paths, commands, identifiers, URLs, and quoted errors exact.
+If the repo already has an equivalent owner-facing document, update it instead and add a root link if needed.
+
+## Language Matching
+
+Choose one output language for the brief before writing:
+
+- Prefer the language of the current user request.
+- If the current request does not make the language clear, follow the existing brief or the dominant project documentation language.
+- If the user explicitly asks for another language, follow that request.
+- Korean user prompts should produce Korean briefs; English user prompts should produce English briefs.
+- Match prose, section headings, table headers, Mermaid titles, and Mermaid node or participant labels to the chosen language.
+- Do not leave starter-template English headings in a non-English brief. Treat the template headings as semantic anchors to translate or localize.
+- Keep paths, commands, identifiers, URLs, product/repo names, API names, and quoted errors exact. Do not translate code, command output, or literal source text.
+- When updating an existing brief section-by-section, match the surrounding document language unless the user asks to switch languages.
 
 ## Manager-Control Lens
 
@@ -80,7 +93,7 @@ Keep each diagram focused. If one diagram tries to explain history, architecture
 
 1. Find the project root and read existing orientation docs: `PROJECT_BRIEF.md`, `README.md`, `AGENTS.md`, `docs/`, recent commits, issue notes, deployment docs, and scripts.
 2. Identify manager-control facts. Separate what is known from what is inferred.
-3. Create or update `PROJECT_BRIEF.md` using the template shape below.
+3. Create or update `PROJECT_BRIEF.md` using the template shape below, localized to the chosen output language.
 4. Use Mermaid for project evolution, current architecture, and operating model.
 5. Mark unknown history or unclear ownership as `Needs confirmation`; do not invent.
 6. After brainstorming, planning, implementation, deployment, verification, or repo restructuring, silently ask: "Would the project owner need to know this to direct future AI work?" If yes, update the brief without waiting for another prompt.
@@ -88,7 +101,7 @@ Keep each diagram focused. If one diagram tries to explain history, architecture
 
 ## Template Shape
 
-Use this structure unless the repo already has a stronger equivalent:
+Use this structure unless the repo already has a stronger equivalent. The English headings below are semantic anchors, not mandatory literal text; translate headings and placeholder copy into the chosen output language when creating or rewriting a brief.
 
 ```markdown
 # Project Brief
@@ -122,7 +135,7 @@ Use this structure unless the repo already has a stronger equivalent:
 ## Needs Confirmation
 ```
 
-Copy the full starter template from `templates/PROJECT_BRIEF.md` when creating a new file.
+Copy the full starter template from `templates/PROJECT_BRIEF.md` when creating a new file, then localize it to the chosen output language before finishing.
 
 ## Update Triggers
 

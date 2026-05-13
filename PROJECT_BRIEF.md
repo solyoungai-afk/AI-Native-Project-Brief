@@ -4,7 +4,7 @@
 
 `AI-Native-Project-Brief` is a reusable skill and installer for maintaining manager-facing project control documents in AI-native software projects. Its main output is a root-level `PROJECT_BRIEF.md` that explains project purpose, evolution, current state, architecture, operating model, dependencies, verification, risks, and next human decisions.
 
-The project is now in its initial public repo shape. It has a GitHub-backed installer, a global Codex-compatible skill, a starter brief template, and tests for installer/skill/package structure. The next manager-level decision is whether to broaden installation support beyond `npx skills add` profiles into deeper native integrations for specific agents.
+The project is now in its initial public repo shape. It has a GitHub-backed installer, a global Codex-compatible skill, a starter brief template, language-matched brief-generation rules, and tests for installer/skill/package structure. The next manager-level decision is whether to broaden installation support beyond `npx skills add` profiles into deeper native integrations for specific agents.
 
 ## Why This Exists
 
@@ -26,18 +26,19 @@ timeline
             : GitHub npx install verified through github:solyoungai-afk/AI-Native-Project-Brief
     Current : Skill revised toward automatic brief maintenance
             : This repo now carries its own PROJECT_BRIEF.md
+            : Language matching added for user/project-localized briefs
 ```
 
 ## Current Product State
 
 | Area | State | Evidence | Notes |
 |---|---|---|---|
-| Skill | Working initial version | `skills/ai-native-project-brief/SKILL.md` | Defines automatic manager-brief maintenance behavior. |
-| Template | Working starter | `skills/ai-native-project-brief/templates/PROJECT_BRIEF.md` | Contains required sections and Mermaid diagrams. |
+| Skill | Working initial version | `skills/ai-native-project-brief/SKILL.md` | Defines automatic manager-brief maintenance and language matching behavior. |
+| Template | Working starter | `skills/ai-native-project-brief/templates/PROJECT_BRIEF.md` | Contains required sections and Mermaid diagrams; headings are semantic anchors to localize. |
 | Installer | Working initial version | `bin/install.js` | Supports `--list`, `--dry-run`, `--only`, `--uninstall`. |
 | Codex install | Verified | `npx skills list -g -a codex --json` | Global install path is `C:\Users\wackyky\.agents\skills\ai-native-project-brief`. |
 | GitHub install | Verified | `npx.cmd -y github:solyoungai-afk/AI-Native-Project-Brief -- --only codex` | Uses GitHub repo as source. |
-| Tests | Passing | `npm test` | 5 tests currently cover package, installer, skill, and template. |
+| Tests | Passing | `npm test` | 8 tests currently cover package, installer, skill, README wording, language matching, and template. |
 
 ## Current Architecture
 
@@ -89,15 +90,16 @@ sequenceDiagram
 | 2026-05-13 | Use `PROJECT_BRIEF.md` as target document | Reads as manager-facing control brief without sounding too bureaucratic | Target projects get a predictable root-level file. | Skill and template |
 | 2026-05-13 | Keep Superpowers unmodified | Skill must operate independently after or beside Superpowers | No dependency on Superpowers internals. | Skill body |
 | 2026-05-13 | Use `npx skills add/remove` delegation | Enables many agent profiles without custom native installers for each | Installer supports Codex and other `skills` profiles. | `bin/install.js` |
+| 2026-05-13 | Match brief language to the current user request first | A Korean prompt should not produce an English manager brief just because the starter template is English | Skill now requires localized prose, headings, tables, and Mermaid labels while preserving literal technical text. | `SKILL.md` and tests |
 
 ## Workstreams
 
 | Workstream | Current State | Owner / Agent Role | Next Step |
 |---|---|---|---|
-| Skill behavior | Initial behavior defined | Owner sets intent; agent updates `SKILL.md` and tests | Validate in real target projects. |
+| Skill behavior | Initial behavior defined with language matching | Owner sets intent; agent updates `SKILL.md` and tests | Validate in real target projects. |
 | Installer | GitHub `npx` path works | Agent maintains provider matrix and flags | Add native integrations only if needed. |
 | Documentation | README and this brief exist | Agent keeps manager-facing docs current | Keep README install-focused and brief manager-focused. |
-| Tests | Basic structural tests pass | Agent expands tests when behavior changes | Add tests for README wording and automatic behavior. |
+| Tests | Basic structural and language-matching tests pass | Agent expands tests when behavior changes | Add scenario-style tests after real field use. |
 | Distribution | GitHub remote pushed | Owner controls repo visibility and release posture | Consider tags/releases after field use. |
 
 ## Dependencies And Access
@@ -125,6 +127,7 @@ sequenceDiagram
 | Risk | Why It Matters | Watch Signal | Mitigation |
 |---|---|---|---|
 | Skill behaves like optional command | Owner wants automatic brief maintenance | README or skill says "ask for..." as primary usage | Keep skill wording centered on automatic triggers. |
+| Brief language mismatches the user | Owner expects Korean output from Korean prompts and English output from English prompts | Non-English prompts still leave English section headings, table labels, or Mermaid labels | Enforce language matching in `SKILL.md`, README, and tests. |
 | Brief becomes code inventory | Manager needs control context, not implementation trivia | Many file/function details, few decisions/risks | Enforce manager-control lens. |
 | Installer overclaims support | Profiles may exist but agent-specific behavior may vary | Installs but agent does not trigger skill well | Say "skills CLI profiles" and verify important targets. |
 | Superpowers coupling creeps in | Requirement says Superpowers must remain untouched | Skill requires Superpowers files or patches | Keep Superpowers as optional trigger context only. |
@@ -135,9 +138,9 @@ sequenceDiagram
 These are decisions the AI agent should not silently make alone.
 
 - Should the repo remain a minimal `skills` CLI package, or add deeper native installers for specific agents later?
-- Should the brief template stay English-first for public distribution, or include a Korean template variant?
 - Should releases/tags be used after the first stable version?
 - Which real project should be the first field test for automatic `PROJECT_BRIEF.md` maintenance?
+- Should future releases include example localized briefs beyond the English starter template?
 
 ## New Worker Brief
 
@@ -153,4 +156,4 @@ Read this before touching code:
 
 - Whether GitHub repo visibility is public or private.
 - Whether users beyond Codex need immediate real-world install verification.
-- Whether a Korean localized `PROJECT_BRIEF.ko.md` template should be added.
+- Whether localized example briefs should be added after field testing.

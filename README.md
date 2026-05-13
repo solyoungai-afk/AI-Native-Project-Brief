@@ -48,6 +48,8 @@ The human owner should not need to remember a separate command for normal use. T
 
 The brief is for the human manager or project owner, not only for code readers. It explains project purpose, evolution, current product state, architecture, operating model, key decisions, dependencies, verification, risks, and next decisions.
 
+The output language follows the current user request first, then the existing brief or dominant project documentation language. Korean prompts should produce Korean prose, section headings, tables, and Mermaid labels; English prompts should produce English output. Paths, commands, identifiers, URLs, repo names, API names, and quoted errors stay exact.
+
 ## Supported Install Targets
 
 The installer delegates to `npx skills add/remove` for skill-compatible agents:

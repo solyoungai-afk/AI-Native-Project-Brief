@@ -56,12 +56,25 @@ test('skill frontmatter and body target manager-facing project control', () => {
   assert.match(skill, /Next Human Decisions/);
 });
 
+test('skill requires language-matched briefs', () => {
+  const skill = read('skills/ai-native-project-brief/SKILL.md');
+
+  assert.match(skill, /## Language Matching/);
+  assert.match(skill, /Prefer the language of the current user request/);
+  assert.match(skill, /Korean user prompts should produce Korean briefs/);
+  assert.match(skill, /section headings, table headers, Mermaid titles/);
+  assert.match(skill, /Do not leave starter-template English headings in a non-English brief/);
+  assert.match(skill, /Keep paths, commands, identifiers, URLs/);
+});
+
 test('README describes automatic behavior instead of command-style usage prompts', () => {
   const readme = read('README.md');
 
   assert.match(readme, /Automatic Project Brief Behavior/);
   assert.match(readme, /should create or update/);
   assert.match(readme, /should not need to remember a separate command/);
+  assert.match(readme, /The output language follows the current user request first/);
+  assert.match(readme, /Korean prompts should produce Korean prose/);
   assert.doesNotMatch(readme, /ask for one of these/i);
 });
 
