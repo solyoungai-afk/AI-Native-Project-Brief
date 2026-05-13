@@ -1,0 +1,31 @@
+{
+  "name": "ai-native-project-brief",
+  "version": "0.1.0",
+  "description": "Installer and skill for maintaining manager-facing project briefs for AI-native projects.",
+  "license": "MIT",
+  "author": "solyoungai-afk",
+  "homepage": "https://github.com/solyoungai-afk/AI-Native-Project-Brief",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solyoungai-afk/AI-Native-Project-Brief.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solyoungai-afk/AI-Native-Project-Brief/issues"
+  },
+  "bin": {
+    "ai-native-project-brief": "./bin/install.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "agents/",
+    "README.md",
+    "LICENSE"
+  ]
+}

@@ -1,0 +1,3 @@
+display_name: AI Native Project Brief
+short_description: Maintain manager-facing project briefs for AI-native projects.
+default_prompt: Create or update PROJECT_BRIEF.md so a human owner can understand project purpose, evolution, current state, architecture, risks, verification, dependencies, and next decisions.
