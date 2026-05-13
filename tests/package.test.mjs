@@ -38,6 +38,8 @@ test('dry-run for codex prints skills add command without writing', () => {
 
   assert.match(output, /would run: npx -y skills add solyoungai-afk\/AI-Native-Project-Brief -g -a codex -s ai-native-project-brief --yes/);
   assert.match(output, /installed codex/);
+  assert.match(output, /maintain PROJECT_BRIEF\.md when manager-level project context changes/);
+  assert.doesNotMatch(output, /ask your agent/i);
 });
 
 test('skill frontmatter and body target manager-facing project control', () => {
@@ -46,9 +48,21 @@ test('skill frontmatter and body target manager-facing project control', () => {
   assert.match(skill, /^---\nname: ai-native-project-brief/m);
   assert.match(skill, /Use when introducing, managing, onboarding, or re-orienting an AI-native software project/);
   assert.match(skill, /PROJECT_BRIEF\.md/);
+  assert.match(skill, /Automatic Behavior/);
+  assert.match(skill, /do not stop at advice or a suggested outline/i);
+  assert.match(skill, /do not require the user to say a special command/i);
   assert.match(skill, /Manager-Control Lens/);
   assert.match(skill, /Project Evolution/);
   assert.match(skill, /Next Human Decisions/);
+});
+
+test('README describes automatic behavior instead of command-style usage prompts', () => {
+  const readme = read('README.md');
+
+  assert.match(readme, /Automatic Project Brief Behavior/);
+  assert.match(readme, /should create or update/);
+  assert.match(readme, /should not need to remember a separate command/);
+  assert.doesNotMatch(readme, /ask for one of these/i);
 });
 
 test('brief template contains required sections and Mermaid diagrams', () => {
@@ -74,4 +88,26 @@ test('brief template contains required sections and Mermaid diagrams', () => {
   assert.match(template, /```mermaid\n+timeline/);
   assert.match(template, /```mermaid\n+flowchart/);
   assert.match(template, /```mermaid\n+sequenceDiagram/);
+});
+
+test('repo carries its own manager-facing PROJECT_BRIEF', () => {
+  const brief = read('PROJECT_BRIEF.md');
+
+  for (const heading of [
+    'Manager Summary',
+    'Project Evolution',
+    'Current Architecture',
+    'Operating Model',
+    'Key Decisions',
+    'Verification And Quality Gates',
+    'Risks And Watchpoints',
+    'Next Human Decisions'
+  ]) {
+    assert.match(brief, new RegExp(`## ${heading}`));
+  }
+
+  assert.match(brief, /```mermaid\n+timeline/);
+  assert.match(brief, /```mermaid\n+flowchart/);
+  assert.match(brief, /```mermaid\n+sequenceDiagram/);
+  assert.match(brief, /automatic brief maintenance/i);
 });

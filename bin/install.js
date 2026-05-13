@@ -309,7 +309,7 @@ function main() {
     process.stdout.write('  nothing matched. Use --list or --only <agent>.\n');
   }
   process.stdout.write('\n');
-  process.stdout.write('Use: ask your agent to create or update PROJECT_BRIEF.md for the project manager.\n');
+  process.stdout.write('Use: compatible agents maintain PROJECT_BRIEF.md when manager-level project context changes.\n');
   process.stdout.write(`Uninstall: npx -y github:${REPO} -- --uninstall\n`);
 
   return results.failed.length && !results.installed.length && !results.removed.length ? 1 : 0;

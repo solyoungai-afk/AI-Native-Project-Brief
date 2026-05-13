@@ -36,22 +36,17 @@ Uninstall from detected or selected targets:
 npx -y github:solyoungai-afk/AI-Native-Project-Brief -- --uninstall
 ```
 
-## Usage
+## Automatic Project Brief Behavior
 
-In an AI coding session, ask for one of these:
-
-- "Create a project brief for this AI-native project."
-- "Update `PROJECT_BRIEF.md` after this work."
-- "Show the manager-facing project state with Mermaid."
-- "After Superpowers brainstorming, create the project brief."
-
-The skill should create or update:
+After installation, compatible agents can discover this skill when a project needs manager-facing orientation, architecture context, project history, risk tracking, onboarding, or post-brainstorming documentation. When the skill triggers, the agent should create or update:
 
 ```text
 PROJECT_BRIEF.md
 ```
 
-The brief is for the human manager or project owner, not only for code readers. It should explain project purpose, evolution, current product state, architecture, operating model, key decisions, dependencies, verification, risks, and next human decisions.
+The human owner should not need to remember a separate command for normal use. The skill tells the agent to keep the brief current whenever work changes manager-level context: product state, architecture, operating model, dependencies, verification, risks, or next human decisions.
+
+The brief is for the human manager or project owner, not only for code readers. It explains project purpose, evolution, current product state, architecture, operating model, key decisions, dependencies, verification, risks, and next decisions.
 
 ## Supported Install Targets
 

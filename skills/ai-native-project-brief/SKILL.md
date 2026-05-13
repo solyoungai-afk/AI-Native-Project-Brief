@@ -1,6 +1,6 @@
 ---
 name: ai-native-project-brief
-description: Use when introducing, managing, onboarding, or re-orienting an AI-native software project; when a human owner needs a manager-facing project brief; when project history, architecture, risks, decisions, dependencies, verification, or next human decisions must be captured or updated.
+description: Use when introducing, managing, onboarding, or re-orienting an AI-native software project; when a human owner needs manager-facing project control context; after brainstorming or project work changes history, architecture, risks, decisions, dependencies, verification, or next human decisions.
 ---
 
 # AI Native Project Brief
@@ -10,6 +10,12 @@ description: Use when introducing, managing, onboarding, or re-orienting an AI-n
 Maintain a root-level `PROJECT_BRIEF.md` for the human project owner. In an AI-native project, coding agents can inspect implementation details; the manager needs control context: why the project exists, how it evolved, current state, operating model, risks, validation, dependencies, and decisions that require human judgment.
 
 This skill is independent. It may be used after `superpowers:brainstorming`, but it does not modify or depend on Superpowers internals.
+
+## Automatic Behavior
+
+When this skill triggers, do not stop at advice or a suggested outline. Create or update `PROJECT_BRIEF.md` as part of the task unless the user explicitly says not to write files, the current workspace has no identifiable project root, or another owner-facing brief already exists and should be updated instead.
+
+Do not require the user to say a special command such as "create project brief" during normal work. If the conversation or code changes reveal manager-level context, maintain the brief automatically before finishing.
 
 ## When To Use
 
@@ -70,14 +76,14 @@ Add more only when useful:
 
 Keep each diagram focused. If one diagram tries to explain history, architecture, and operations at once, split it.
 
-## Workflow
+## Automatic Maintenance Workflow
 
 1. Find the project root and read existing orientation docs: `PROJECT_BRIEF.md`, `README.md`, `AGENTS.md`, `docs/`, recent commits, issue notes, deployment docs, and scripts.
 2. Identify manager-control facts. Separate what is known from what is inferred.
 3. Create or update `PROJECT_BRIEF.md` using the template shape below.
 4. Use Mermaid for project evolution, current architecture, and operating model.
 5. Mark unknown history or unclear ownership as `Needs confirmation`; do not invent.
-6. After implementation work, ask: "Would the project owner need to know this to direct future AI work?" If yes, update the brief.
+6. After brainstorming, planning, implementation, deployment, verification, or repo restructuring, silently ask: "Would the project owner need to know this to direct future AI work?" If yes, update the brief without waiting for another prompt.
 7. Before finishing, verify the file has required sections, at least the needed Mermaid diagrams, and no stale contradictions.
 
 ## Template Shape
@@ -152,3 +158,4 @@ Before claiming the brief is ready, check:
 | One giant diagram | Split into evolution, architecture, and operations. |
 | AI-invented history | Mark as `Needs confirmation` and cite evidence when possible. |
 | No update after major change | Update `PROJECT_BRIEF.md` in the same work session. |
+| Waiting for a special user command | Treat manager-level context changes as an automatic update trigger. |
