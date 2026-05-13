@@ -67,6 +67,16 @@ test('skill requires language-matched briefs', () => {
   assert.match(skill, /Keep paths, commands, identifiers, URLs/);
 });
 
+test('skill gives natural Korean heading guidance', () => {
+  const skill = read('skills/ai-native-project-brief/SKILL.md');
+
+  assert.match(skill, /natural project-management Korean rather than literal word-by-word translations/);
+  assert.match(skill, /사람이 결정해야 할 사항/);
+  assert.match(skill, /다음 작업자 안내/);
+  assert.match(skill, /다음 사람 결정/);
+  assert.match(skill, /새 작업자 브리프/);
+});
+
 test('README describes automatic behavior instead of command-style usage prompts', () => {
   const readme = read('README.md');
 

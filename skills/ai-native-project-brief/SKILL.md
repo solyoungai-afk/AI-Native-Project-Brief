@@ -52,6 +52,25 @@ Choose one output language for the brief before writing:
 - Keep paths, commands, identifiers, URLs, product/repo names, API names, and quoted errors exact. Do not translate code, command output, or literal source text.
 - When updating an existing brief section-by-section, match the surrounding document language unless the user asks to switch languages.
 
+For Korean briefs, localize section names into natural project-management Korean rather than literal word-by-word translations. Good defaults:
+
+| English anchor | Prefer Korean like | Avoid |
+|---|---|---|
+| Manager Summary | 프로젝트 요약 | 매니저 요약 |
+| Why This Exists | 목적과 배경 | 이것이 존재하는 이유 |
+| Project Evolution | 진행 경과 | 프로젝트 진화 |
+| Current Product State | 현재 제품 상태 | 현재 제품 상태값 |
+| Current Architecture | 현재 구조 | 현재 아키텍처 |
+| Operating Model | 운영 방식 | 오퍼레이팅 모델 |
+| Key Decisions | 주요 결정 | 키 결정 |
+| Workstreams | 작업 영역 | 작업 흐름 |
+| Dependencies And Access | 의존성과 접근 정보 | 의존성 그리고 접근 |
+| Verification And Quality Gates | 검증과 품질 기준 | 검증 그리고 품질 게이트 |
+| Risks And Watchpoints | 리스크와 주의점 | 위험과 감시점 |
+| Next Human Decisions | 사람이 결정해야 할 사항 | 다음 사람 결정 |
+| New Worker Brief | 다음 작업자 안내 | 새 작업자 브리프 |
+| Needs Confirmation | 확인 필요 | 필요 확인 |
+
 ## Manager-Control Lens
 
 Prefer content a human owner must know to direct future AI work:

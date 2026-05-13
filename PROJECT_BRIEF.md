@@ -4,7 +4,7 @@
 
 `AI-Native-Project-Brief` is a reusable skill and installer for maintaining manager-facing project control documents in AI-native software projects. Its main output is a root-level `PROJECT_BRIEF.md` that explains project purpose, evolution, current state, architecture, operating model, dependencies, verification, risks, and next human decisions.
 
-The project is now in its initial public repo shape. It has a GitHub-backed installer, a global Codex-compatible skill, a starter brief template, language-matched brief-generation rules, and tests for installer/skill/package structure. The next manager-level decision is whether to broaden installation support beyond `npx skills add` profiles into deeper native integrations for specific agents.
+The project is now in its initial public repo shape. It has a GitHub-backed installer, a global Codex-compatible skill, a starter brief template, language-matched brief-generation rules, Korean heading-localization guardrails, and tests for installer/skill/package structure. The next manager-level decision is whether to broaden installation support beyond `npx skills add` profiles into deeper native integrations for specific agents.
 
 ## Why This Exists
 
@@ -27,18 +27,19 @@ timeline
     Current : Skill revised toward automatic brief maintenance
             : This repo now carries its own PROJECT_BRIEF.md
             : Language matching added for user/project-localized briefs
+            : Korean heading examples added to prevent literal calques
 ```
 
 ## Current Product State
 
 | Area | State | Evidence | Notes |
 |---|---|---|---|
-| Skill | Working initial version | `skills/ai-native-project-brief/SKILL.md` | Defines automatic manager-brief maintenance and language matching behavior. |
+| Skill | Working initial version | `skills/ai-native-project-brief/SKILL.md` | Defines automatic manager-brief maintenance, language matching, and Korean heading-localization behavior. |
 | Template | Working starter | `skills/ai-native-project-brief/templates/PROJECT_BRIEF.md` | Contains required sections and Mermaid diagrams; headings are semantic anchors to localize. |
 | Installer | Working initial version | `bin/install.js` | Supports `--list`, `--dry-run`, `--only`, `--uninstall`. |
 | Codex install | Verified | `npx skills list -g -a codex --json` | Global install path is `C:\Users\wackyky\.agents\skills\ai-native-project-brief`. |
 | GitHub install | Verified | `npx.cmd -y github:solyoungai-afk/AI-Native-Project-Brief -- --only codex` | Uses GitHub repo as source. |
-| Tests | Passing | `npm test` | 8 tests currently cover package, installer, skill, README wording, language matching, and template. |
+| Tests | Passing | `npm test` | 9 tests currently cover package, installer, skill, README wording, language matching, Korean heading guidance, and template. |
 
 ## Current Architecture
 
@@ -91,15 +92,16 @@ sequenceDiagram
 | 2026-05-13 | Keep Superpowers unmodified | Skill must operate independently after or beside Superpowers | No dependency on Superpowers internals. | Skill body |
 | 2026-05-13 | Use `npx skills add/remove` delegation | Enables many agent profiles without custom native installers for each | Installer supports Codex and other `skills` profiles. | `bin/install.js` |
 | 2026-05-13 | Match brief language to the current user request first | A Korean prompt should not produce an English manager brief just because the starter template is English | Skill now requires localized prose, headings, tables, and Mermaid labels while preserving literal technical text. | `SKILL.md` and tests |
+| 2026-05-13 | Add Korean heading guidance | Literal calques such as `다음 사람 결정` and `새 작업자 브리프` sound unnatural in Korean manager documents | Skill now gives preferred Korean headings such as `사람이 결정해야 할 사항` and `다음 작업자 안내`. | `SKILL.md` and tests |
 
 ## Workstreams
 
 | Workstream | Current State | Owner / Agent Role | Next Step |
 |---|---|---|---|
-| Skill behavior | Initial behavior defined with language matching | Owner sets intent; agent updates `SKILL.md` and tests | Validate in real target projects. |
+| Skill behavior | Initial behavior defined with language matching and Korean heading guidance | Owner sets intent; agent updates `SKILL.md` and tests | Validate in real target projects. |
 | Installer | GitHub `npx` path works | Agent maintains provider matrix and flags | Add native integrations only if needed. |
 | Documentation | README and this brief exist | Agent keeps manager-facing docs current | Keep README install-focused and brief manager-focused. |
-| Tests | Basic structural and language-matching tests pass | Agent expands tests when behavior changes | Add scenario-style tests after real field use. |
+| Tests | Basic structural, language-matching, and Korean heading guidance tests pass | Agent expands tests when behavior changes | Add scenario-style tests after real field use. |
 | Distribution | GitHub remote pushed | Owner controls repo visibility and release posture | Consider tags/releases after field use. |
 
 ## Dependencies And Access
@@ -128,6 +130,7 @@ sequenceDiagram
 |---|---|---|---|
 | Skill behaves like optional command | Owner wants automatic brief maintenance | README or skill says "ask for..." as primary usage | Keep skill wording centered on automatic triggers. |
 | Brief language mismatches the user | Owner expects Korean output from Korean prompts and English output from English prompts | Non-English prompts still leave English section headings, table labels, or Mermaid labels | Enforce language matching in `SKILL.md`, README, and tests. |
+| Literal translated headings | A brief can be technically Korean but still sound machine-translated | Headings like `다음 사람 결정` or `새 작업자 브리프` appear | Keep Korean heading examples in the skill and test for them. |
 | Brief becomes code inventory | Manager needs control context, not implementation trivia | Many file/function details, few decisions/risks | Enforce manager-control lens. |
 | Installer overclaims support | Profiles may exist but agent-specific behavior may vary | Installs but agent does not trigger skill well | Say "skills CLI profiles" and verify important targets. |
 | Superpowers coupling creeps in | Requirement says Superpowers must remain untouched | Skill requires Superpowers files or patches | Keep Superpowers as optional trigger context only. |
